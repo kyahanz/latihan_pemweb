@@ -5,63 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>UTS - Framework Pemrograman Web</title>
- 
+
     <!-- bootstrap -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css">
 </head>
 <body>
- 
+
         <div class="container">
             <div class="row justify-content-center">
-                <!-- <div class="col-lg-6">
-                    <div class="card mt-5">
-                        <div class="card-body">
-
-                            
- 
-                            {{-- menampilkan error validasi --}}
-                            @if (count($errors) > 0)
-                            <div class="alert alert-danger">
-                                <ul>
-                                    @foreach ($errors->all() as $error)
-                                        <li>{{ $error }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                            @endif
- 
-                            <br/>
-                            <form action="/proses" method="post">
-                                {{ csrf_field() }}
- 
-                                <div class="form-group">
-                                    <label for="kode_barang">Kode Barang</label>
-                                    <input class="form-control" type="text" name="kode_barang" value="{{ old('kode_barang') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="nama_barang">Nama Barang</label>
-                                    <input class="form-control" type="text" name="nama_barang" value="{{ old('nama_barang') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="jenis_varaian">Jenis Varian</label>
-                                    <input class="form-control" type="text" name="jenis_varian" value="{{ old('jenis_varian') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="qty">QTY</label>
-                                    <input class="form-control" type="text" name="qty" value="{{ old('qty') }}">
-                                </div>
-                                <div class="form-group">
-                                    <label for="harga_jual">Harga Jual</label>
-                                    <input class="form-control" type="text" name="harga_jual" value="{{ old('harga_jual') }}">
-                                </div>
-                                <div class="form-group">
-                                    <input class="btn btn-primary" type="submit" value="Proses">
-                                </div>
-                            </form>
- 
-                        </div>
-                    </div>
-                </div> -->
                 <form action="/proses" method="post">
                                 {{ csrf_field() }}
                 <div>
@@ -72,31 +23,34 @@
                     Basic form layout
                   </p>
                   <form class="forms-sample">
+
                     <div class="form-group">
-                        <label for="kode_barang">Kode Barang</label>
-                        <input class="form-control" type="text" name="kode_barang" value="{{ old('kode_barang') }}" placeholder="Kode Barang">
+                        <label for="no_barang">Nomor Barang</label>
+                        <input class="form-control" type="number" name="no_barang" value="{{ old('no_barang') }}" placeholder="No Barang">
                     </div>
                     <div class="form-group">
                         <label for="nama_barang">Nama Barang</label>
                         <input class="form-control" type="text" name="nama_barang" value="{{ old('nama_barang') }}" placeholder="Nama Barang">
                     </div>
                     <div class="form-group">
-                    <label for="jenis_varian">Jenis Varian</label>
-                        <input class="form-control" type="text" name="jenis_varian" value="{{ old('jenis_varian') }}" placeholder="Jenis Varian">
+                    <label for="varian_barang">Jenis Varian</label>
+                        <input class="form-control" type="text" name="varian_barang" value="{{ old('varian_barang') }}" placeholder="Jenis Varian">
                     </div>
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                     <label for="qty">QTY</label>
-                        <input class="form-control" type="text" name="qty" value="{{ old('qty') }}" placeholder="QTY">
+                        <input class="form-control" type="number" name="qty" value="{{ old('qty') }}" placeholder="QTY">
+                    </div> -->
+                    <div class="form-group">
+                    <label for="tanggal_kadaluarsa">Tanggal Kadaluarsa</label>
+                        <input class="form-control" type="date" name="tanggal_kadaluarsa" value="{{ old('tanggal_kadaluarsa') }}" placeholder="Tanggal Kadaluarsa">
                     </div>
                     <div class="form-group">
-                    <label for="harga_jual">Harga Jual</label>
-                        <input class="form-control" type="text" name="harga_jual" value="{{ old('harga_jual') }}" placeholder="Harga Jual">
+                    <label for="tanggal_produksi">Tanggal Produksi</label>
+                        <input class="form-control" type="date" name="tanggal_produksi" value="{{ old('tanggal_produksi') }}" placeholder="Tanggal Produksi">
                     </div>
-                    <div class="form-check form-check-flat form-check-primary">
-                      <label class="form-check-label">
-                        <input type="checkbox" class="form-check-input">
-                        Remember me
-                      </label>
+                    <div class="form-group">
+                    <label for="harga_beli">Harga Jual</label>
+                        <input class="form-control" type="number" name="harga_beli" value="{{ old('harga_beli') }}" placeholder="Harga Jual">
                     </div>
                     <button type="submit" class="btn btn-primary me-2" Value="Proses">Submit</button>
                     <button class="btn btn-light">Cancel</button>
@@ -105,9 +59,9 @@
               </div>
             </div>
                 </form>
-            
+
             </div>
         </div>
-   
+
 </body>
 </html>

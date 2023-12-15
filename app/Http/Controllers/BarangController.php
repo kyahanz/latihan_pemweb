@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Barang;
 
 class BarangController extends Controller
 {
@@ -11,36 +12,78 @@ class BarangController extends Controller
         return view('input');
     }
 
+    public function edit($id)
+    {
+        $barang = Barang::findOrFail($id);
+        return view('edit', compact('barang'));
+    }
+
+    public function view_data(){
+        $barang = Barang::get();
+        return view('list_barang',['barang' => $barang]);
+    }
+
     public function proses(Request $request)
     {
+
         $this->validate($request,[
-           'kode_barang' => 'required',
            'nama_barang' => 'required',
-           'jenis_varian' => 'required',
-           'qty' => 'required|numeric',
-           'harga_jual' => 'required|numeric',
+           'varian_barang' => 'required',
+           
+           'harga_beli' => 'required|numeric',
+           'tanggal_kadaluarsa' => 'required|date',
+           'tanggal_produksi' => 'required|date',
+           'no_barang' => 'required|numeric'
         ]);
 
-        // Hitung total harga jual
-        $totalHargaJual = $request->qty * $request->harga_jual;
+        $barang = Barang::create([
+            'nama_barang' => $request->nama_barang,
+            'varian_barang' => $request->varian_barang,
+            
+            'harga_beli' => $request->harga_beli,
+            'tanggal_kadaluarsa' => $request->tanggal_kadaluarsa,
+            'tanggal_produksi' => $request->tanggal_produksi,
+            'no_barang' => $request->no_barang,
+        ]);
 
-        // Hitung potongan harga
-        if ($totalHargaJual >= 500000) {
-            $potonganHarga = $totalHargaJual * 0.5;
-        } elseif ($totalHargaJual >= 200000) {
-            $potonganHarga = $totalHargaJual * 0.2;
-        } elseif ($totalHargaJual >= 100000) {
-            $potonganHarga = $totalHargaJual * 0.1;
-        } else {
-            $potonganHarga = 0;
-        }
-
-        // Hitung harga setelah diskon
-        $hargaSetelahDiskon = $totalHargaJual - $potonganHarga;
- 
-        return view('proses',['data' => $request,
-                    'totalHargaJual' => $totalHargaJual,
-                    'potonganHarga' => $potonganHarga,
-                    'hargaSetelahDiskon' => $hargaSetelahDiskon]);
+        $barang = Barang::get();
+        return view('list_barang',['barang' => $barang]);
     }
+
+    public function editProses($id, Request $request)
+    {
+
+//        dd($request->all());
+
+        $this->validate($request,[
+            'nama_barang' => 'required',
+            'varian_barang' => 'required',
+           
+            'harga_beli' => 'required|numeric',
+            'tanggal_kadaluarsa' => 'required|date',
+            'tanggal_produksi' => 'required|date',
+            'no_barang' => 'required|numeric'
+        ]);
+
+        $barang = Barang::findOrFail($id)->update([
+            'nama_barang' => $request->nama_barang,
+            'varian_barang' => $request->varian_barang,
+            
+            'harga_beli' => $request->harga_beli,
+            'tanggal_kadaluarsa' => $request->tanggal_kadaluarsa,
+            'tanggal_produksi' => $request->tanggal_produksi,
+            'no_barang' => $request->no_barang,
+        ]);
+
+        return redirect('/view_data');
+
+    }
+
+    public function deleteProses($id)
+    {
+        Barang::findOrFail($id)->delete();
+
+        return redirect('/view_data');
+    }
+
 }
